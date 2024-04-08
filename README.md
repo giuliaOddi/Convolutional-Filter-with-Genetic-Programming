@@ -14,7 +14,7 @@ The complete dataset is characterised by 6000 elements, initially labelled in tw
 ## Random Forest Classificator
 To assess the quality of the genetic programming algorithm, a comparison is made with a **Random Forest classifier**. In order to eliminate the random component of this classifier, a *seed_state = 1200* was chosen at the beginning, which was then used in each Random Forest of the project. The dataset was split into a train-set and a test-set. Then, the Random Forest classifier was trained on the train-set and the performances was evaluated on the test-set. In detail, this classifier achieved an *F1 score* of 0.9534 on the 6000-item dataset.
 
-# Genetic Programming ALgorithm
+## Genetic Programming ALgorithm
 Genetic programming was used to find the best convolutional filter and to see if it could outperform the Random Forest classifier.
 In genetic programming, each individual resulting from evolution can be seen as a function that takes a set of input parameters and produces an output.
 In this case, the aim was to have a genetic programme that could generate individuals with a number of input parameters equal to the size of the kernel and produce a single value as an output. In general, therefore, the starting point was to find the optimal kernel size, which is characterised by the variable *KERNEL_SIZE*. After a few trials, it turned out that the best kernel size for convolution on this signal was one of size = 6, followed by one of size = 7.
