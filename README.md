@@ -8,13 +8,21 @@ In general, the project was implemented in Python with the support of several li
 The signal used for the project is a temporal signal that concerns electrocardiograms or ECGs. In the project, the dataset used was composed by a *.csv file* in which each line regards a specific EGC signal, thus the dataset contains signals relating to individual heart beats. In particular, an ECG is a diagnostic examination that records the electrical activity of the heart in order to assess its state of health and detect various cardiac anomalies, pathologies or arrhythmias. The dataset cannot be published due to privacy concerns. In order to achieve a fixed length for all length for all selected parts, these were filled with zeros. In the *.csv file* the dataset is composed by some columns, in which the first column contains the class label and the remaining columns represent the length of the signal, filled with zeros to obtain a fixed length.
 
 The complete dataset is characterised by 6000 elements, initially labelled in two classes:
-- **Normal**: label 0.0. These signals refer to normal electrocardiograms, i.e. without any cardiac abnormality, pathology or arrhythmia.
-- **Abnormal**: label 1.0. These signal abnormal electrocardiograms, therefore characterised by the presence of possible cardiac abnormalities, pathologies or arrhythmias.
+- **Normal**: label 0.0. These signals refer to normal electrocardiograms, i.e. without any cardiac abnormality, pathology or arrhythmia. 
+
+    <img src="./images/normale.png" alt="Normale" style="width: 60%;">
+
+
+- **Abnormal**: label 1.0. These signal abnormal electrocardiograms, therefore characterised by the presence of possible cardiac abnormalities, pathologies or arrhythmias. 
+
+    <img src="./images/anomalo.png" alt="Normale" style="width: 60%;">
 
 ## Random Forest Classificator
 To assess the quality of the genetic programming algorithm, a comparison is made with a **Random Forest classifier**. In order to eliminate the random component of this classifier, a *seed_state = 1200* was chosen at the beginning, which was then used in each Random Forest of the project. The dataset was split into a train-set and a test-set. Then, the Random Forest classifier was trained on the train-set and the performances was evaluated on the test-set. In detail, this classifier achieved an *F1 score* of 0.9534 on the 6000-item dataset.
 
-## Genetic Programming ALgorithm
+<img src="./images/matrix1.png" alt="Matrix1" style="width: 40%;"> <img src="./images/matrix2.png" alt="Matrix2" style="width: 40.5%;">
+
+## Genetic Programming Algorithm
 Genetic programming was used to find the best convolutional filter and to see if it could outperform the Random Forest classifier.
 In genetic programming, each individual resulting from evolution can be seen as a function that takes a set of input parameters and produces an output.
 In this case, the aim was to have a genetic programme that could generate individuals with a number of input parameters equal to the size of the kernel and produce a single value as an output. In general, therefore, the starting point was to find the optimal kernel size, which is characterised by the variable *KERNEL_SIZE*. After a few trials, it turned out that the best kernel size for convolution on this signal was one of size = 6, followed by one of size = 7.
@@ -29,4 +37,8 @@ The main operation performed by the algorithm concerns **convolution**, necessar
 
 The test phase was carried out on the test set in order to evaluate the performance of the algorithm, and in this case of the best kernel found, on data that had never been seen before. In fact, once the best individual had been selected, it was necessary to apply the convolution also to the test set. To access the best individual and kernel found by the genetic programming algorithm, DEAP's *HallOfFame* was used, which keeps track of the best solutions found during evolution.
 
-Thus, the best results based on the F1 score and therefore the fitness of the best individual were found with a kernel size of 7. In fact, with the dimension 6 kernel, the final F1 score was 0.9668, while with the dimension 7 kernel it was 0.9696. In both cases there is an improvement over the original Random Forest classifier. More details and some examples are reported in the *Report.pdf file*.
+Thus, the best results based on the F1 score and therefore the fitness of the best individual were found with a kernel size of 7. In fact, with the dimension 6 kernel, the final F1 score was 0.9668, while with the dimension 7 kernel it was 0.9696. 
+
+<img src="./images/matrix3.png" alt="Matrix3" style="width: 40%;"> <img src="./images/matrix4.png" alt="Matrix4" style="width: 40.5%;">
+
+In both cases there is an improvement over the original Random Forest classifier. More details and some examples are reported in the *Report.pdf file*.
